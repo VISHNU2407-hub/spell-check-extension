@@ -1,0 +1,22 @@
+{
+  "name": "autocorrect-ai",
+  "version": "1.0.0",
+  "description": "AutoCorrect AI — real-time spelling correction with offline engine + Groq AI",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "backend": "node backend/server.mjs",
+    "start": "node backend/server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "e2e": "node scripts/e2e/run.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.280",
+    "esbuild": "^0.21.5",
+    "puppeteer": "^25.13.0",
+    "typescript": "^5.5.4"
+  }
+}

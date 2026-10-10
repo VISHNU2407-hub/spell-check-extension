@@ -1,0 +1,13 @@
+*.log
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+
+# NEVER commit API keys or secrets
+.env
+!.env.example
+.env.*
+!backend/.env.example
+*.key
+config/secrets.*

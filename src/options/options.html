@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoCorrect AI — Settings</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="logo">A</div>
+      <div>
+        <h1>AutoCorrect AI — Settings</h1>
+        <p>Offline correction works with no key. AI correction is <strong>off by default</strong> and only runs when you enable it.</p>
+      </div>
+    </header>
+
+    <section class="card warn" id="privacyCard">
+      <h2>Privacy notice</h2>
+      <p>Enabling <strong>AI correction</strong> sends <em>eligible typed text only</em> (never passwords, payment fields, or full pages) to
+      <code>https://api.groq.com</code> for correction. Keys are stored in <code>chrome.storage.local</code> on your device —
+      client-side keys cannot be fully protected. For publicly distributed builds, use a secure backend proxy instead of a shared key.</p>
+    </section>
+
+    <section class="card">
+      <h2>General</h2>
+      <label class="row"><span>Extension enabled</span><input type="checkbox" id="extensionEnabled" /></label>
+      <label class="row"><span>Auto-correction</span><input type="checkbox" id="autoCorrectEnabled" /></label>
+      <label class="row"><span>Offline (local) correction</span><input type="checkbox" id="offlineEnabled" /></label>
+      <label class="row"><span>AI correction (sends text to Groq)</span><input type="checkbox" id="aiEnabled" /></label>
+      <label class="row"><span>Show ✨ AI correction button</span><input type="checkbox" id="showAiButton" /></label>
+      <label class="row"><span>Debug logging (metadata only, never text)</span><input type="checkbox" id="debugLogging" /></label>
+    </section>
+
+    <section class="card">
+      <h2>Correction mode</h2>
+      <label class="field">Mode
+        <select id="correctionMode">
+          <option value="automatic">Automatic — correct while typing</option>
+          <option value="click">Click to Correct — only when you click ✨ (no automatic replacement)</option>
+          <option value="both">Both — automatic correction plus ✨ button</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Groq AI</h2>
+      <p id="proxyStatus" class="status"></p>
+      <label class="field">Local proxy URL (key stays in backend .env)
+        <input type="text" id="backendUrl" placeholder="http://127.0.0.1:8787" spellcheck="false" />
+      </label>
+      <label class="field">API key
+        <input type="password" id="apiKey" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
+      </label>
+      <div class="btnrow">
+        <button id="saveKey" class="primary">Save key</button>
+        <button id="testConn">Test connection</button>
+      </div>
+      <p id="connStatus" class="status"></p>
+      <label class="field">Model
+        <select id="model"></select>
+      </label>
+      <label class="field">Typing debounce (ms)
+        <input type="number" id="debounceMs" min="300" max="5000" step="50" />
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Correction behavior</h2>
+      <label class="field">Sensitivity
+        <select id="sensitivity">
+          <option value="conservative">Conservative — dictionary map only</option>
+          <option value="balanced">Balanced — map + careful fuzzy</option>
+          <option value="aggressive">Aggressive — wider fuzzy matching</option>
+        </select>
+      </label>
+      <label class="field">Language
+        <select id="language">
+          <option value="en">English</option>
+        </select>
+      </label>
+      <label class="field">Excluded websites (one per line)
+        <textarea id="excludedSites" rows="4" placeholder="github.com&#10;stackoverflow.com"></textarea>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Statistics</h2>
+      <p><span id="todayCount">0</span> corrected today · <span id="totalCount">0</span> total</p>
+      <button id="resetStats">Reset statistics</button>
+    </section>
+
+    <p id="saved" class="saved">Saved ✓</p>
+  </main>
+  <script src="options.js"></script>
+</body>
+</html>

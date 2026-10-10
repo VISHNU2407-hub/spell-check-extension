@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoCorrect AI</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="card">
+    <header class="header">
+      <div class="logo">A</div>
+      <div>
+        <h1>AutoCorrect AI</h1>
+        <p class="subtitle">Type freely. We fix spelling.</p>
+      </div>
+      <span id="connBadge" class="badge disconnected" title="Groq connection status">Offline</span>
+    </header>
+
+    <section class="rows">
+      <label class="row">
+        <span><strong>Extension</strong><small>Master on/off switch</small></span>
+        <input type="checkbox" id="extensionEnabled" class="switch" />
+      </label>
+      <label class="row">
+        <span><strong>Auto-correction</strong><small>Fix words as you type</small></span>
+        <input type="checkbox" id="autoCorrectEnabled" class="switch" />
+      </label>
+      <label class="row">
+        <span><strong>AI correction</strong><small>Sends eligible text to Groq</small></span>
+        <input type="checkbox" id="aiEnabled" class="switch" />
+      </label>
+      <label class="row">
+        <span><strong>✨ AI button</strong><small>Floating correct button</small></span>
+        <input type="checkbox" id="showAiButton" class="switch" />
+      </label>
+    </section>
+
+    <p id="privacyNote" class="privacy hidden">AI is off. When enabled, eligible typed text is sent to Groq for correction.</p>
+
+    <section class="field">
+      <p id="proxyStatus" class="status"></p>
+      <label for="apiKey">Groq API key <small class="opt">(optional if proxy runs)</small></label>
+      <div class="keyrow">
+        <input type="password" id="apiKey" placeholder="gsk_..." autocomplete="off" spellcheck="false" />
+        <button id="toggleKey" title="Show/hide key">👁</button>
+      </div>
+      <div class="btnrow">
+        <button id="saveKey" class="primary">Save key</button>
+        <button id="testConn">Test connection</button>
+      </div>
+      <p id="connStatus" class="status"></p>
+    </section>
+
+    <section class="grid2">
+      <div class="field">
+        <label for="model">AI model</label>
+        <select id="model"></select>
+      </div>
+      <div class="field">
+        <label for="sensitivity">Sensitivity</label>
+        <select id="sensitivity">
+          <option value="conservative">Conservative</option>
+          <option value="balanced">Balanced</option>
+          <option value="aggressive">Aggressive</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="field">
+      <label for="correctionMode">Correction mode</label>
+      <select id="correctionMode">
+        <option value="automatic">Automatic — correct while typing</option>
+        <option value="click">Click to Correct — only via ✨</option>
+        <option value="both">Both</option>
+      </select>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><span id="todayCount">0</span><small>corrected today</small></div>
+      <div class="stat"><span id="totalCount">0</span><small>total corrections</small></div>
+      <button id="openOptions" class="ghost">⚙ Settings</button>
+    </section>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
